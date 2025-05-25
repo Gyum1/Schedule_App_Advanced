@@ -12,9 +12,12 @@
 
 ###  유저 API
 
-| 기능 | Method | URL | 요청 값 | 응답 값                                            | 상태코드 |
-| --- | --- | --- | --- |-------------------------------------------------| --- |
-| 회원가입 | POST | /api/users/signup | { "username": "사용자", "email": "user@email.com", "password": "1234" } | 회원가입 완료 메시지                                     | 200 |
-| 로그인 | POST | /api/users/login | { "email": "...", "password": "..." } | 세션 쿠키 + 로그인 성공 메시지                              | 200 |
-| 로그아웃 | POST | /api/users/logout | 없음 | 로그아웃 완료 메시지                                     | 200 |
-| 내 정보 조회 | GET | /api/users/me | 없음 | { "id": 1, ㅇ"username": "...", "email": "..." } | 200 |
+| 기능 | Method | URL | 요청 값 | 응답 값                                           | 상태코드 |
+| --- | --- | --- | --- |------------------------------------------------| --- |
+| 회원가입 | POST | /api/users/signup | { "username": "사용자", "email": "user@email.com", "password": "1234" } | 회원가입 완료 메시지                                    | 200 |
+| 로그인 | POST | /api/users/login | { "email": "...", "password": "..." } | 세션 쿠키 + 로그인 성공 메시지                             | 200 |
+| 로그아웃 | POST | /api/users/logout | 없음 | 로그아웃 완료 메시지                                    | 200 |
+| 내 정보 조회 | GET | /api/users/me | 없음 | { "id": 1, "username": "...", "email": "..." } | 200 |
+
+### ERD 설계도
+![ERD](./docs/erd.png)
