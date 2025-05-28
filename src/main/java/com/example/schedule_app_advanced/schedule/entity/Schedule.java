@@ -36,7 +36,19 @@ public class Schedule {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+    public Schedule(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
 
     // @TODO: User 연관관계 추가 예정 (Lv 2에서)
     // 작성자 기준의 일정 필터링을 위해
+
+
 }
