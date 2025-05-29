@@ -1,0 +1,26 @@
+### 일정 생성
+POST http://localhost:8080/api/schedules
+Content-Type: application/json
+
+{
+  "title": "과제",
+  "content": "JPA 사용하기"
+}
+
+### 일정 전체 조회
+GET http://localhost:8080/api/schedules
+
+### 일정 단건 조회
+GET http://localhost:8080/api/schedules/1
+
+### 일정 수정
+PUT http://localhost:8080/api/schedules/1
+Content-Type: application/json
+
+{
+  "title": "과제 진행중",
+  "content": "어려움"
+}
+
+### 일정 삭제
+DELETE http://localhost:8080/api/schedules/1
