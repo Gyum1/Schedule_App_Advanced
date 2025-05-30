@@ -1,5 +1,6 @@
 package com.example.schedule_app_advanced.schedule.entity;
 
+import com.example.schedule_app_advanced.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,6 @@ import java.time.LocalDateTime;
 
 /**
  * 일정 정보를 저장하는 Schedule 엔티티
- * @author ...
  */
 @Getter
 @NoArgsConstructor
@@ -28,27 +28,25 @@ public class Schedule {
 
     private String content;
 
-    // 추후 User 연관관계 설정 시 ManyToOne 예정 (@ManyToOne private User user)
-
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
-    public Schedule(String title, String content) {
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public Schedule(String title, String content, User user) {
         this.title = title;
         this.content = content;
+        this.user = user;
     }
 
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
     }
-
-
-    // @TODO: User 연관관계 추가 예정 (Lv 2에서)
-    // 작성자 기준의 일정 필터링을 위해
-
-
 }
