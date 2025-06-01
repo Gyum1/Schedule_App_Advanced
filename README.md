@@ -21,3 +21,4 @@
 
 ### ERD 설계도
 ![ERD](./docs/erd.png)
+![ERD](./docs/erd(comments).png)
