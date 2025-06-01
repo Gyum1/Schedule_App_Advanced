@@ -35,6 +35,7 @@ public class Schedule {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    // 연관관계 매핑: 일정 → 작성자 (User). 단방향. 작성자 기준 일정 필터링 가능.
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

@@ -4,6 +4,7 @@ import com.example.schedule_app_advanced.schedule.dto.ScheduleRequestDto;
 import com.example.schedule_app_advanced.schedule.dto.ScheduleResponseDto;
 import com.example.schedule_app_advanced.schedule.entity.Schedule;
 import com.example.schedule_app_advanced.schedule.repository.ScheduleRepository;
+import com.example.schedule_app_advanced.user.entity.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,8 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
 
     // 일정 생성
-    public ScheduleResponseDto createSchedule(ScheduleRequestDto requestDto) {
-        Schedule schedule = new Schedule(requestDto.getTitle(), requestDto.getContent());
+    public ScheduleResponseDto createSchedule(ScheduleRequestDto requestDto, User user) {
+        Schedule schedule = new Schedule(requestDto.getTitle(), requestDto.getContent(), user); // 연관된 유저를 함께 저장
         scheduleRepository.save(schedule);
         return new ScheduleResponseDto(schedule);
     }
@@ -41,9 +42,6 @@ public class ScheduleService {
         Schedule schedule = findSchedule(id);
         return new ScheduleResponseDto(schedule);
     }
-
-
-
 
     // 수정
     @Transactional
