@@ -28,6 +28,9 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password; // @TODO: Lv4에서 암호화 적용 예정
+
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -35,15 +38,14 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public User(String username, String email) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
+        this.password = password;
     }
 
     public void update(String username, String email) {
         this.username = username;
         this.email = email;
     }
-
-    // @TODO: Lv3에서 비밀번호 필드 추가 예정 (암호화 포함)
 }
