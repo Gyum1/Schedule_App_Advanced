@@ -7,7 +7,10 @@ import lombok.Getter;
  */
 @Getter
 public class UserRequestDto {
+
     private String username;
     private String email;
-    private String password; // @TODO: Lv4에서 암호화 적용 예정
+
+    // @TODO: Lv3에서 비밀번호 필드 추가 예정
+    private String password;
 }
