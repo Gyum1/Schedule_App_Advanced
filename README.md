@@ -72,6 +72,17 @@
 
 ---
 
+### 댓글 API
+
+| 기능 | Method | URL | 요청 값 | 응답 값 | 상태코드 |
+| --- | --- | --- | --- | --- | --- |
+| 댓글 등록 | POST | /api/comments?scheduleId={id} | { "content": "댓글 내용" } | 생성된 댓글 정보 | 200 |
+| 댓글 조회 | GET | /api/comments?scheduleId={id} | 없음 | [ { "id": 1, "content": "...", ... }, ... ] | 200 |
+| 댓글 수정 | PUT | /api/comments/{commentId} | { "content": "수정 내용" } | 수정된 댓글 정보 | 200 |
+| 댓글 삭제 | DELETE | /api/comments/{commentId} | PathVariable | 없음 | 200 |
+
+---
+
 ## 5. ERD 설계도
 
 - 유저-일정: 1:N 단방향
