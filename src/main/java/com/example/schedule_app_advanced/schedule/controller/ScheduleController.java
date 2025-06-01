@@ -42,27 +42,34 @@ public class ScheduleController {
 
     /**
      * 특정 일정 조회
+     * 로그인된 유저 정보 필요
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ScheduleResponseDto> get(@PathVariable Long id) {
-        return ResponseEntity.ok(scheduleService.getSchedule(id));
+    public ResponseEntity<ScheduleResponseDto> get(@PathVariable Long id, HttpServletRequest req) {
+        User user = (User) req.getSession().getAttribute("user");
+        return ResponseEntity.ok(scheduleService.getSchedule(id, user));
     }
 
     /**
      * 일정 수정
+     * 로그인된 유저 정보 필요
      */
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> update(@PathVariable Long id,
-                                                      @RequestBody ScheduleRequestDto requestDto) {
-        return ResponseEntity.ok(scheduleService.updateSchedule(id, requestDto));
+                                                      @RequestBody ScheduleRequestDto requestDto,
+                                                      HttpServletRequest req) {
+        User user = (User) req.getSession().getAttribute("user");
+        return ResponseEntity.ok(scheduleService.updateSchedule(id, requestDto, user));
     }
 
     /**
      * 일정 삭제
+     * 로그인된 유저 정보 필요
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        scheduleService.deleteSchedule(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id, HttpServletRequest req) {
+        User user = (User) req.getSession().getAttribute("user");
+        scheduleService.deleteSchedule(id, user);
         return ResponseEntity.ok().build();
     }
 }
