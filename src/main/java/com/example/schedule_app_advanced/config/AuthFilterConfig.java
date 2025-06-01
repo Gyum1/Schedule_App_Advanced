@@ -42,13 +42,8 @@ public class AuthFilterConfig {
 
             String uri = request.getRequestURI();
 
-            // 로그인 및 회원가입 요청은 필터 제외
-            if (uri.equals("/users") && request.getMethod().equals("POST")) {
-                filterChain.doFilter(request, response);
-                return;
-            }
-
-            if (uri.equals("/users/login")) {
+            // ✅ 로그인 및 회원가입 요청은 필터 제외
+            if (uri.equals("/users/signup") || uri.equals("/users/login")) {
                 filterChain.doFilter(request, response);
                 return;
             }
