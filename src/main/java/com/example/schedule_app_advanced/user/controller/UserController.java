@@ -3,6 +3,7 @@ package com.example.schedule_app_advanced.user.controller;
 import com.example.schedule_app_advanced.user.dto.UserRequestDto;
 import com.example.schedule_app_advanced.user.dto.UserResponseDto;
 import com.example.schedule_app_advanced.user.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +62,21 @@ public class UserController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
+    }
+
+    /**
+     * 로그인
+     * @param requestDto 로그인 요청 정보 (이메일, 비밀번호)
+     * @param req HttpServletRequest: 세션 생성용
+     * @return 로그인 성공/실패 메시지
+     */
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserRequestDto requestDto, HttpServletRequest req) {
+        try {
+            userService.login(requestDto, req);
+            return ResponseEntity.ok("로그인 성공");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(401).body("로그인 실패: " + e.getMessage());
+        }
     }
 }

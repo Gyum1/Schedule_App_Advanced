@@ -29,7 +29,7 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String password; // @TODO: Lv4에서 암호화 처리 예정
+    private String password;
 
     @CreatedDate
     @Column(updatable = false)
@@ -38,18 +38,12 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    /**
-     * 사용자 등록 생성자
-     */
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    /**
-     * 사용자 정보 수정
-     */
     public void update(String username, String email) {
         this.username = username;
         this.email = email;

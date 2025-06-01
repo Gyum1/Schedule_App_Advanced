@@ -7,10 +7,7 @@ import lombok.Getter;
  */
 @Getter
 public class UserRequestDto {
-
     private String username;
     private String email;
-
-    // @TODO: Lv3에서 비밀번호 필드 추가 예정
-    private String password;
+    private String password; // 로그인에 사용될 필드
 }
