@@ -1,5 +1,6 @@
 package com.example.schedule_app_advanced.user.service;
 
+import com.example.schedule_app_advanced.config.PasswordEncoder;
 import com.example.schedule_app_advanced.user.dto.UserRequestDto;
 import com.example.schedule_app_advanced.user.dto.UserResponseDto;
 import com.example.schedule_app_advanced.user.entity.User;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 회원가입 처리
@@ -27,7 +29,9 @@ public class UserService {
      * @return 생성된 사용자 응답 정보
      */
     public UserResponseDto signup(UserRequestDto requestDto) {
-        User user = new User(requestDto.getUsername(), requestDto.getEmail(), requestDto.getPassword());
+        // 비밀번호 암호화 후 저장
+        String encodedPassword = passwordEncoder.encode(requestDto.getPassword());
+        User user = new User(requestDto.getUsername(), requestDto.getEmail(), encodedPassword);
         userRepository.save(user);
         return new UserResponseDto(user);
     }
@@ -41,7 +45,8 @@ public class UserService {
         User user = userRepository.findByEmail(requestDto.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("이메일을 찾을 수 없습니다."));
 
-        if (!user.getPassword().equals(requestDto.getPassword())) {
+        // 암호화된 비밀번호 비교
+        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
